@@ -1,0 +1,3 @@
+<template>
+    Teams Footer
+</template>
