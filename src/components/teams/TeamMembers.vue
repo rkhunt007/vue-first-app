@@ -16,18 +16,34 @@
 import UserItem from '../users/UserItem.vue';
 
 export default {
+  inject: ['users', 'teams'],
+  props: ['teamId'],
   components: {
     UserItem
   },
   data() {
     return {
-      teamName: 'Test',
-      members: [
-        { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-        { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-      ],
+      teamName: '',
+      members: [],
     };
   },
+  created() {
+    this.loadTeamMembers(this.teamId);
+  },
+  watch: {
+    teamId(newValue) {
+      this.loadTeamMembers(newValue);
+    }
+  },
+  methods: {
+    loadTeamMembers(teamId) {
+      const team = this.teams.find(team => team.id === teamId);
+      this.members = this.users.filter(user => {
+        return team.members.includes(user.id);
+      });
+      this.teamName = team.name;
+    }
+  }
 };
 </script>
 
