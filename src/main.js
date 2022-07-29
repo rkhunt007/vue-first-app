@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import BaseCard from './components/UI/BaseCard.vue';
 import BaseButton from './components/UI/BaseButton.vue';
+import BaseBadge from './components/UI/BaseBadge.vue';
 import BaseModal from './components/BaseModal.vue'
 import App from './App.vue';
 import TeamsList from './components/teams/TeamsList.vue';
@@ -13,8 +14,10 @@ import UsersFooter from './components/users/UsersFooter.vue';
 import NotFound from './components/nav/NotFound.vue';
 import AllUsers from './components/Pages/AllUsers.vue';
 import CourseGoals from './components/Pages/CourseGoals.vue';
+import router from './router';
+import store from './store/index';
 
-const router = createRouter({
+/* const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
@@ -53,22 +56,22 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return {left: 0, top: 0};
   }
-});
-
-router.beforeEach(function(to, from, next) {
-//    console.log({to, from, next})
-   next();
-});
+}); */
 
 const app = createApp(App);
 
 app.use(router);
+app.use(store);
 
 app.component('base-card', BaseCard);
 app.component('base-modal', BaseModal);
 app.component('base-button', BaseButton);
+app.component('base-badge', BaseBadge);
 
-router.isReady().then(function() {
-  app.mount('#app');
-})
+// router.isReady().then(function() {
+//   app.mount('#app');
+// })
+
+app.mount('#app');
+
 

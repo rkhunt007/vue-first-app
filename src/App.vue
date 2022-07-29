@@ -1,20 +1,26 @@
 <template>
-  <!-- <learning-survey></learning-survey> -->
-  <!-- <user-experiences></user-experiences> -->
-  <!-- <the-navigation></the-navigation> -->
+  <div>
+    <TheHeader></TheHeader>
+    <router-view></router-view>
+  </div>
+
+  <!-- <base-container title="Vuex"></base-container>
+
+  <learning-survey></learning-survey>
+  <user-experiences></user-experiences>
+  <the-navigation></the-navigation>
   <main>
     <router-view v-slot="{ Component }">
       <transition name="route" mode="out-in">
         <component :is="Component" />
       </transition>
     </router-view>
-    
   </main>
   <footer>
-    <!-- <router-view name="footer"></router-view> -->
+    <router-view name="footer"></router-view>
   </footer>
 
-  <!-- <div class="container">
+  <div class="container">
     <list-data></list-data>
   </div>
 
@@ -55,14 +61,18 @@
 // import UserExperiences from './components/survey/UserExperiences.vue';
 
 import TheNavigation from './components/nav/TheNavigation.vue';
+import TheHeader from './components/layout/TheHeader.vue';
 import ListData from './components/ListData.vue';
+import BaseContainer from './components/BaseContainer.vue';
 
 export default {
   components: {
     // LearningSurvey,
     // UserExperiences,
     // TheNavigation
-    // ListData
+    // ListData,
+    // BaseContainer,
+    TheHeader
   },
   data() {
     return {
@@ -82,7 +92,7 @@ export default {
       animateDialog: false,
       showParagraph: false,
       enterInterval: null,
-      leaveInterval: null
+      leaveInterval: null,
     };
   },
   provide() {
@@ -121,7 +131,7 @@ export default {
     leave(el, done) {
       let round = 1;
       this.leaveInterval = setInterval(() => {
-        el.style.opacity = 1 - (round * 0.01);
+        el.style.opacity = 1 - round * 0.01;
         round++;
         if (round > 100) {
           clearInterval(this.leaveInterval);
@@ -130,14 +140,14 @@ export default {
       }, 20);
     },
     afterLeave(el) {
-      console.log('afterLeave')
+      console.log('afterLeave');
     },
     enterCancelled(el) {
       clearInterval(this.enterInterval);
     },
     leaveCancelled(el) {
       clearInterval(this.leaveInterval);
-    }
+    },
   },
 };
 </script>
