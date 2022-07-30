@@ -62,7 +62,6 @@ export default {
     }
   },
   mounted() {
-    console.log('mounted')
     this.loadExperiances();
   }
 };
