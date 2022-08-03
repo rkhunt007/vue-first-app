@@ -4,6 +4,7 @@ import CoachRegister from './pages/coaches/CoachRegister.vue';
 import CoachDetail from './pages/coaches/CoachDetail.vue';
 import RequestsReceived from './pages/requests/RequestsReceived.vue';
 import ContactCoach from './pages/requests/ContactCoach.vue';
+import UserAuth from './pages/auth/UserAuth.vue';
 import NotFound from './pages/NotFound.vue';
 
 const router = createRouter({
@@ -19,6 +20,7 @@ const router = createRouter({
     },
     { path: '/requests', component: RequestsReceived },
     { path: '/register', component: CoachRegister },
+    { path: '/auth', component: UserAuth },
     { path: '/:notFound(.*)', component: NotFound },
   ],
 });
