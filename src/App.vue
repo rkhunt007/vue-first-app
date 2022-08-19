@@ -101,6 +101,9 @@ export default {
       users: this.users,
     };
   },
+  created() {
+    this.$store.dispatch('tryLogin');
+  },
   methods: {
     showDialog() {
       this.dialogIsVisible = true;

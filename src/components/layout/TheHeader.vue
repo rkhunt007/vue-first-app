@@ -11,9 +11,17 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/requests">
+          <router-link to="/requests" v-if="isLoggedIn">
             Requests
           </router-link>
+          <router-link to="/auth" v-else>
+            Login
+          </router-link>
+        </li>
+        <li>
+          <base-button @click="logout" v-if="isLoggedIn">
+            Logout
+          </base-button>
         </li>
       </ul>
     </nav>
@@ -21,6 +29,18 @@
 </template>
 
 <script>
+export default {
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+    }
+  }
+}
 </script>
 
 <style scoped>

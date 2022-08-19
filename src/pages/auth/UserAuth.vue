@@ -1,8 +1,11 @@
 <template>
   <div>
-
-    <base-dialog :show="!!error" title="An error occuered.." @close="error = null">
-    {{error }}
+    <base-dialog
+      :show="!!error"
+      title="An error occuered.."
+      @close="error = null"
+    >
+      {{ error }}
     </base-dialog>
 
     <base-dialog :show="isLoading" title="authenticationg..." fixed>
@@ -52,7 +55,6 @@ export default {
   },
   methods: {
     async submitForm() {
-      console.log('submit');
       this.isFormValid = true;
       if (
         this.email === '' ||
@@ -66,16 +68,21 @@ export default {
 
       this.isLoading = true;
 
+      const userData = {
+        email: this.email,
+        password: this.password,
+      };
+
       try {
         if (this.mode === 'login') {
+          await this.$store.dispatch('login', userData);
         } else {
-          await this.$store.dispatch('signup', {
-            email: this.email,
-            password: this.password,
-          });
+          await this.$store.dispatch('signup', userData);
         }
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+        this.$router.replace(redirectUrl);
       } catch (error) {
-        console.log('error')
+        console.log('error');
         this.error = error.message || 'Failed to auth';
       }
 

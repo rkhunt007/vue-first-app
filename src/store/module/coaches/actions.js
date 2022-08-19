@@ -1,8 +1,9 @@
 export default {
     async registerCoach(context, payload) {
         const userId = context.rootGetters.userId;
+        const token = context.rootGetters.token;
 
-        const res = await fetch(`https://vue-http-requests-a120f-default-rtdb.firebaseio.com/coaches/${userId}.json`, {
+        const res = await fetch(`https://vue-http-requests-a120f-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=${token}`, {
             method: 'PUT',
             body: JSON.stringify(payload)
         });
